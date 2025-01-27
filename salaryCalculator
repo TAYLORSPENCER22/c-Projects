@@ -1,0 +1,111 @@
+//
+//  Taylor Spencer
+//  Lab 4
+//  6/24/23
+//
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+
+int main()
+{
+
+    // PAY RATE VARIABLES
+    const double MIN_WAGE = 18;
+    const double OVERTIME_WAGE_CALCULATOR = 1.5;
+    const double FULL_TIME_HOURS = 40;
+    const double MIN_WORK_HOURS = 0;
+
+    // COMMISSION RATES FOR SALES
+    const double COMMISSION_RATE1 = .02;
+    const double COMMISSION_RATE2 = .03;
+    const double COMMISSION_RATE3 = .04;
+    const double COMMISSION_RATE4 = .05;
+
+    // THRESHOLD FOR SALE RATES
+    const double MINIMUM_COMMISSION = 0;
+    const double SALES_MAX1 = 5000;  // for commission rate 1
+    const double SALES_MAX2 = 10000; // for commission rate 2
+    const double SALES_MAX3 = 20000; // for commission rate 3
+
+    // VARIABLES
+    double weeklySalary;
+    double hoursWorked;
+    double regularHours;
+    double overtimeHours;
+    double weeklySales;
+    double weeklyCommission;
+
+    cout << "  Calculate Employee Salary For The Week" << endl
+         << endl;
+
+    cout << "  Please enter the number of hours you worked this week:  ";
+    cin >> hoursWorked;
+
+    // CALCULATE THE WEEKLY SALARY WITH MINIMUM WAGE AND OVERTIME HOURS
+    if (hoursWorked < MIN_WORK_HOURS)
+    { // ERROR CHECKING
+        cout << "  Error! No negative numbers. Please enter a valid number! " << endl;
+        cout << endl;
+        cout << "  Please enter the number of hours you worked this week: ";
+        cin >> hoursWorked;
+        cout << endl;
+    }
+
+    if (hoursWorked > FULL_TIME_HOURS)
+    {
+        regularHours = FULL_TIME_HOURS;
+        overtimeHours = hoursWorked - FULL_TIME_HOURS;
+        weeklySalary = (regularHours * MIN_WAGE) + (overtimeHours * OVERTIME_WAGE_CALCULATOR * MIN_WAGE);
+    }
+
+    else
+    {
+        regularHours = hoursWorked;
+        weeklySalary = regularHours * MIN_WAGE;
+    }
+
+    cout << "  Please enter the amount you made in sales this week: $";
+    cin >> weeklySales;
+
+    cout << endl;
+
+    // CALCULATE THE WEEKLY SALARY FROM SALES
+    if (weeklySales < MINIMUM_COMMISSION)
+    { // ERROR CHECKING
+        cout << "  Error! No negative numbers. Please enter a valid number! " << endl;
+        cout << endl;
+        cout << "  Please enter the amount you made in sales this week: $ ";
+        cin >> weeklySales;
+        cout << endl;
+    }
+
+    if (weeklySales < SALES_MAX1)
+        weeklyCommission = weeklySales * COMMISSION_RATE1;
+    else if (weeklySales < SALES_MAX2)
+        weeklyCommission = weeklySales * COMMISSION_RATE2;
+    else if (weeklySales < SALES_MAX3)
+        weeklyCommission = weeklySales * COMMISSION_RATE3;
+    else
+        weeklyCommission = weeklySales * COMMISSION_RATE4;
+
+    // DISPLAY AMOUNTS EARNED THROUGHOUT THE WEEK
+
+    cout << fixed << setprecision(2);
+    cout << "  This week you earned: $" << weeklySalary << " from minimum wages!" << endl;
+    cout << "  This week you earned: $" << weeklyCommission << " in commission!" << endl
+         << endl;
+
+    if (weeklySalary > weeklyCommission)
+        cout << "  You earned more from minimum wages this week, therefore your paycheck will be: $" << weeklySalary << endl;
+    else if (weeklySalary < weeklyCommission)
+        cout << "  You earned more from commission this week, therefore your paycheck will be: $" << weeklyCommission << endl;
+    else
+        cout << "  You earned the same amount from minimum wages and commission this week, therefore your paycheck will be: $" << weeklySalary << endl
+             << endl;
+
+    cout << endl;
+
+    return 0;
+}
