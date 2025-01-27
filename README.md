@@ -1,4 +1,3 @@
-# passwordValidator
-c++ password Validator
+c++ projects
 
-this was created for my C++ class ~
+this is a collection of projects i completed in my C++ class.
